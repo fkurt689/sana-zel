@@ -5,22 +5,25 @@
   <title>Sana Özel 💖</title>
   <style>
     body {
-      background-color: #1a1a1a;
+      background: linear-gradient(135deg, #1a1a1a, #2c2c54);
       color: white;
       font-family: Arial, sans-serif;
       text-align: center;
       margin: 0;
       padding: 0;
+      overflow-x: hidden;
     }
     h1 {
       margin-top: 30px;
       font-size: 2.5em;
       color: #ff6b81;
+      animation: fadeIn 3s ease-in-out;
     }
     p {
       font-size: 1.2em;
       margin: 20px;
       color: #f1f1f1;
+      animation: glow 2s infinite alternate;
     }
     .gallery {
       display: flex;
@@ -34,16 +37,43 @@
       object-fit: cover;
       border-radius: 15px;
       box-shadow: 0 0 15px rgba(255,107,129,0.6);
+      transition: transform 0.3s;
+    }
+    .gallery img:hover {
+      transform: scale(1.1);
     }
     audio {
       margin-top: 30px;
+    }
+    /* Yazı animasyonu */
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #ff6b81; }
+      to { text-shadow: 0 0 20px #ff6b81, 0 0 30px #ff4757; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    /* Kalpler arka plan animasyonu */
+    .heart {
+      position: fixed;
+      top: -10px;
+      font-size: 20px;
+      color: #ff6b81;
+      animation: fall linear forwards;
+    }
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
     }
   </style>
 </head>
 <body>
   <h1>Sana Küsmek Olmaz 💕</h1>
-  <p>Ne kadar trip atsan da, sen benim için çok özelsin, 💖
-</p>senin tribini yerimmmm</p>
+  <p>Buraya kendi yazını yazabilirsin 💖</p>
+
   <div class="gallery">
     <img src="foto1.jpg" alt="Fotoğraf 1">
     <img src="foto2.jpg" alt="Fotoğraf 2">
@@ -54,8 +84,22 @@
     <source src="muzik.mp3" type="audio/mpeg">
     Tarayıcınız müzik çalmayı desteklemiyor.
   </audio>
+
+  <script>
+    // Sayfada sürekli kalpler uçsun
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+      heart.innerText = "💖";
+      document.body.appendChild(heart);
+      setTimeout(() => {
+        heart.remove();
+      }, 5000);
+    }
+    setInterval(createHeart, 500);
+  </script>
 </body>
 </html>
-
-
 
